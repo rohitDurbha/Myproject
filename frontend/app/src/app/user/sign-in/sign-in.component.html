@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<br>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+<div style="text-align: center;" class="hero">
+  <br>
+  <div>
+    <i class="fas fa-user fa-5x" style="color:salmon"></i>
+  </div><!--
+  --><div >
+  <br>  
+  <div style="border-radius: 30px;">
+  <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+    <input type="text" name="email" #email="ngModel" [(ngModel)]="model.email" placeholder="Email" [pattern]="emailRegex" required
+      [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }" style="border-radius: 15px;">
+    <div *ngIf="signInForm.submitted && email.errors?.pattern">
+      <label class="validation-message">Invalid email address.</label>
+    </div>
+    <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" placeholder="Password" required minlength="4"
+      [ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }" style="border-radius: 15px;">
+    <div *ngIf="signInForm.submitted && password.errors?.minlength">
+      <label class="validation-message">Minimum 4 characters.</label>
+    </div>
+    <br><br>
+    <input type="submit" value="Sign In" style="border-radius: 18px;">
+  </form>
+</div>
+</div>
+  <!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+    {{serverErrorMessages}}
+  </div>
+</div>
+

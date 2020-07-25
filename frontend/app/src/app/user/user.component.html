@@ -1,0 +1,32 @@
+<body class="hero">
+  <div id ="first">
+  <h1>Welcome Back!</h1>
+  <h3 style="text-align: center; color:blanchedalmond;">Log in to access the marketplace.</h3>
+</div>
+<div id ="second" style="display: none;">
+  <h1>Welcome!</h1>
+  <h3 style="text-align: center; color:blanchedalmond;">Log in to access the marketplace.</h3>
+</div>
+<div class="wrapper" style="font-size:x-large; position: fixed;">
+  <div id="formContent" class="text_select" style="border-radius: 40px;">
+    <a><h2 class="underlineHover" routerLink="/login" id="login" routerLinkActive="active" style="margin-bottom: 30px; cursor: pointer;" > Sign In </h2></a>
+    <a><h2 class="underlineHover" routerLink="/signup" id="reg" routerLinkActive="active" style="margin-left: 120px; margin-bottom: 30px; cursor: pointer; " >Sign Up </h2></a>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<script>
+  document.getElementById("login").addEventListener("click", display("login"));
+  document.getElementById("reg").addEventListener("click", display("reg"));
+function display(text){
+  var e=text;
+  if(e=='login'){
+      document.getElementById("first").style.display = 'block';
+      document.getElementById("second").style.display = 'none';
+  }
+  else if(e=='reg'){
+      document.getElementById("second").style.display = 'block';
+      document.getElementById("first").style.display = 'none';
+  }
+}
+</script>
+</body>

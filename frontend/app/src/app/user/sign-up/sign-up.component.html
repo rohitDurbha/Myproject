@@ -1,0 +1,42 @@
+<div class="signup-form hero"  style="text-align: center;">
+  <br>
+  <div>
+    <i class="fas fa-users fa-5x" style="color:salmon"></i>
+  </div>
+  <br>
+  <div style="border-radius: 30px;">
+    <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+        <div class="form-group">
+        <input type="text" #fullName="ngModel" class="form-control" [(ngModel)]="userService.selectedUser.fullName" name="fullName" placeholder="Full Name"
+        required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !fullName.valid }" style="border-radius: 15px;">
+        <div *ngIf="signUpForm.submitted && !fullName.valid">
+          <label class="validation-message">This field is required.</label>
+        </div>
+        <input type="text" #email="ngModel" class="form-control" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="Email"
+        required [pattern]="emailRegex"  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }" style="border-radius: 15px;">
+        <div *ngIf="signUpForm.submitted && email.errors">
+          <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
+          <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
+        </div>
+        <input type="password" #password="ngModel" class="form-control" [(ngModel)]="userService.selectedUser.password" name="password" placeholder="Password"
+        minlength="4" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password.valid }" style="border-radius: 15px;">
+        <div *ngIf="signUpForm.submitted && password.errors">
+          <label *ngIf="password.errors.required" class="validation-message">This field is required.</label>
+          <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 4 characters.</label>
+        </div>
+        <br><br>
+        <input type="submit" class="btn btn-primary" value="Sign Up" style="border-radius: 18px;">
+    </div>
+      </form>
+      </div>
+      <!-- Success message -->
+      <div class="success" *ngIf="showSucessMessage">
+        Saved successfully
+      </div>
+      
+      <!-- Error message -->
+      <div class="alert" *ngIf="serverErrorMessages">
+        {{serverErrorMessages}}
+      </div>
+</div>
+
